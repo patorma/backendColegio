@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
 //se marca la clase como un componente de persistencia acceso a datos
-@Repository
+@Repository("escuelaDaoJPA")
 public class EscuelaDaoImpl implements IEscuelaDao {
 
 	//se inyecta entityManager con la siguiente anotacion
