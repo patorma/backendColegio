@@ -9,14 +9,40 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<h1 th:text="${titulo}"></h1>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Sistema Colegio</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="#about"
+					th:href="@{/listar}">Escuela</a></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Se mapea el objeto escuela al formulario - -->
+	<div class="container">
+		<h1
+			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+			th:text="${titulo}"></h1>
 
-	<form>
-		<table>
-			<tr>
-				
-			</tr>
-		</table>
-	</form>
+		<form th:action="@{/form}" th:object="${escuela}" method="post">
+			<div class="form-group">
+				<label for="nombre">Nombre</label> <input type="text"
+					th:field="*{nombre}" id="nombre"  class="form-control" />
+			</div>
+			<div class="form-group">
+				<label for="direccion">Direccion</label> <input type="text"
+					th:field="*{direccion}" id="direccion"  class="form-control" />
+			</div>
+			<div>
+				<input type="submit" value="Crear Colegio"  class="btn btn-primary" />
+			</div>
+
+		</form>
+	</div>
 </body>
 </html>

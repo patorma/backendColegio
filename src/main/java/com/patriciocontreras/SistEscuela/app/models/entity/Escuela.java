@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,6 +31,12 @@ public class Escuela implements Serializable{/**
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
 	private Date createAt;// fecha de creacion de colegio
+	
+	//se crea metodo antes de que los datos se guarden en la bd
+	@PrePersist //se llama este metodo de crear fecha antes de insertar datos bd
+	public void prePersist() {
+		createAt = new Date();
+	}
 	
 	public Long getId() {
 		return id;
