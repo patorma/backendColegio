@@ -25,4 +25,11 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 		return em.createQuery("from Escuela").getResultList();
 	}
 
+	@Override
+	@Transactional
+	public void save(Escuela escuela) {
+		em.persist(escuela);
+		
+	}
+
 }
