@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,9 +28,14 @@ public class Escuela implements Serializable{/**
 	@GeneratedValue(strategy=GenerationType.IDENTITY)//se indica que es una llave incremental
 	private Long id;
 	//no se utiliza column ya que no son diferentes los atributos con los de bd
+	// se agregan las validaciones correspondiente
+	@NotEmpty
 	private String nombre;
+	
+	@NotEmpty
 	private String direccion;
 	
+	@NotNull
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")

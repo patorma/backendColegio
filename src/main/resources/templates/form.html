@@ -35,6 +35,7 @@
 				<div class="col-sm-6">
 					<input type="text" th:field="*{nombre}" id="nombre"
 						class="form-control" />
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 				</div>
 			</div>
 			<div class="form-group row">
@@ -42,12 +43,14 @@
 				<div class="col-sm-6">
 					<input type="text" th:field="*{direccion}" id="direccion"
 						class="form-control" />
+						<small class="form-text text-danger" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></small>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="fecha" class="col-sm-2 col-form-label">Fecha</label>
 				<div class="col-sm-6">
 					<input type="date" id="fecha"class="form-control" th:field="*{createAt}" >
+					<small class="form-text text-danger" th:if="${#fields.hasErrors('createAt')}" th:errors="*{createAt}"></small>
 				</div>
 			</div>
 			<div class="form-group row">
