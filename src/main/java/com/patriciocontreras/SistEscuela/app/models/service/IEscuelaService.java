@@ -1,11 +1,10 @@
-package com.patriciocontreras.SistEscuela.app.models.dao;
+package com.patriciocontreras.SistEscuela.app.models.service;
 
 import java.util.List;
 
 import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
 
-public interface IEscuelaDao {
-
+public interface IEscuelaService {
 	public List<Escuela> findAll(); //retornar todas las escuelas
 	
 	public void save (Escuela escuela);
@@ -13,4 +12,5 @@ public interface IEscuelaDao {
 	public Escuela findOne(Long id);//busca por una escuela
 	
 	public void delete(Long id);
+
 }

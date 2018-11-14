@@ -24,11 +24,34 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 		// TODO Auto-generated method stub
 		return em.createQuery("from Escuela").getResultList();
 	}
+	
 
+	@Override
+	@Transactional(readOnly=true)
+	public Escuela findOne(Long id) {//va a la bd y entrega el objeto escuela
+		// TODO Auto-generated method stub
+		return em.find(Escuela.class, id);
+	}
+
+	//save es tanto para editar que para insertar
 	@Override
 	@Transactional
 	public void save(Escuela escuela) {
-		em.persist(escuela);
+		if(escuela.getId() != null && escuela.getId() > 0) {
+			em.merge(escuela); //actualiza este metodo los datos existentes osea actualiza escuela
+			//si id existe
+		}else {
+			
+		em.persist(escuela);//el persist crea una nueva escuela , despues la inserta y
+		//relaciona al concepto de persistencia
+		}
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		//obtiene el id, luego lo busca el objeto escuela y lo elimina 
+		em.remove(findOne(id));
 		
 	}
 

@@ -28,7 +28,7 @@
 		<h1
 			class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
-			<a th:href="@{/form}">crear colegio</a>
+			<p><a th:href="@{/form}" class="btn btn-succes btn-xs" >crear colegio</a></p>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -36,6 +36,8 @@
 					<th>nombre</th>
 					<th>direccion</th>
 					<th>fecha</th>
+					<th>editar</th>
+					<th>eliminar</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -45,6 +47,8 @@
 					<td th:text=${escuela.nombre}></td>
 					<td th:text=${escuela.direccion}></td>
 					<td th:text=${escuela.createAt}></td>
+					<td><a class="btn btn-primary btn-xs" th:href="@{/form/}+ ${escuela.id}" th:text="'editar'"></a></td>
+				    <td><a class="btn btn-danger btn-xs" th:href="@{/eliminar/}+ ${escuela.id}" th:text="'eliminar'" onclick="return confirm('Estas seguro que quieres eliminar?;')"></a></td>
 				</tr>
 			</tbody>
 		</table>
