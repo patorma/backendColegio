@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
 //se marca la clase como un componente de persistencia acceso a datos
@@ -18,7 +17,6 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")//se suprime el mensaje warning
-	@Transactional(readOnly=true)//de lectura, transaccional porque es de lectura
 	@Override
 	public List<Escuela> findAll() {
 		// TODO Auto-generated method stub
@@ -27,7 +25,6 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 	
 
 	@Override
-	@Transactional(readOnly=true)
 	public Escuela findOne(Long id) {//va a la bd y entrega el objeto escuela
 		// TODO Auto-generated method stub
 		return em.find(Escuela.class, id);
@@ -35,7 +32,6 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 
 	//save es tanto para editar que para insertar
 	@Override
-	@Transactional
 	public void save(Escuela escuela) {
 		if(escuela.getId() != null && escuela.getId() > 0) {
 			em.merge(escuela); //actualiza este metodo los datos existentes osea actualiza escuela
@@ -48,7 +44,6 @@ public class EscuelaDaoImpl implements IEscuelaDao {
 	}
 
 	@Override
-	@Transactional
 	public void delete(Long id) {
 		//obtiene el id, luego lo busca el objeto escuela y lo elimina 
 		em.remove(findOne(id));

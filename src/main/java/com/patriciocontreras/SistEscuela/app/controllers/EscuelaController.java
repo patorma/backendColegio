@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.patriciocontreras.SistEscuela.app.models.dao.IEscuelaDao;
+
 import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
+import com.patriciocontreras.SistEscuela.app.models.service.IEscuelaService;
 
 @Controller
 @SessionAttributes("escuela")//se guarda el objeto del formulario dentro del sessionAtributes
@@ -25,13 +26,12 @@ public class EscuelaController {
 	//se importa Model para pasar datos a la vista
 	//con @Autowired se hace inyeccion de dependencia
 	@Autowired //busca un componente registrado en el contenedor,busca un bean con esa interface
-	@Qualifier("escuelaDaoJPA")//se indica nombre de componente para seleccionar bean concreto
-	private IEscuelaDao escuelaDao;
+	private IEscuelaService escuelaService;
 	
 	@RequestMapping(value="/listar",method=RequestMethod.GET)//se da la ruta de la vista
 	public String listar (Model model) {
 		model.addAttribute("titulo", "Listado de Colegios");
-		model.addAttribute("escuelas",escuelaDao.findAll());//se pasa el listado de colegios a la vista
+		model.addAttribute("escuelas",escuelaService.findAll());//se pasa el listado de colegios a la vista
 		return "listar";//se retorna nombre de la vista
 	}
 	
@@ -51,7 +51,7 @@ public class EscuelaController {
 		
 		Escuela escuela = null;
 		if(id > 0) {
-			escuela = escuelaDao.findOne(id);
+			escuela = escuelaService.findOne(id);
 		} else {
 			return "redirect:/listar";
 		}
@@ -67,7 +67,7 @@ public class EscuelaController {
 			model.addAttribute("titulo", "Formulario de Colegio");
 			return "form";
 		}
-		escuelaDao.save(escuela);
+		escuelaService.save(escuela);
 		status.setComplete();//elimina el objeto escuela de la session
 		return "redirect:listar";
 	}
@@ -75,7 +75,7 @@ public class EscuelaController {
 	@RequestMapping(value="/eliminar/{id}")
 	public String eliminar(@PathVariable(value="id") Long id) {
 		if(id > 0) {
-			escuelaDao.delete(id);
+			escuelaService.delete(id);
 		}
 		return "redirect:/listar";
 	}

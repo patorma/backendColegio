@@ -2,8 +2,11 @@ package com.patriciocontreras.SistEscuela.app.models.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.patriciocontreras.SistEscuela.app.models.dao.IEscuelaDao;
 import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
 
 //una clase service esta basado en el patron de diseño fakecade o fachada
@@ -12,28 +15,41 @@ import com.patriciocontreras.SistEscuela.app.models.entity.Escuela;
 //service
 @Service 
 public class EscuelaServiceImpl implements IEscuelaService{
+	
+	@Autowired
+	private IEscuelaDao escuelaDao;
+	
 
+	
 	@Override
+	@Transactional(readOnly=true)//de lectura, transaccional porque es de lectura
 	public List<Escuela> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		return escuelaDao.findAll();
+	}
+	
+	@Override
+	@Transactional(readOnly=true)
+	public Escuela findOne(Long id) {
+		// TODO Auto-generated method stub
+		return escuelaDao.findOne(id);
 	}
 
+
 	@Override
+	@Transactional
 	public void save(Escuela escuela) {
 		// TODO Auto-generated method stub
+		escuelaDao.save(escuela);
 		
 	}
 
-	@Override
-	public Escuela findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
+		escuelaDao.delete(id);
 		
 	}
 
