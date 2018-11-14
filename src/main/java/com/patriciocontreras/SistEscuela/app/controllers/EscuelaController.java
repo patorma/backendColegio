@@ -43,9 +43,10 @@ public class EscuelaController {
 	}
 	
 	@RequestMapping(value="/form",method=RequestMethod.POST)
-	public String guardar(@Valid Escuela escuela, BindingResult result) {
+	public String guardar(@Valid Escuela escuela, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {//si el resultado de la evaluacion del BindingREsult tiene error
+			model.addAttribute("titulo", "Formulario de Colegio");
 			return "form";
 		}
 		escuelaDao.save(escuela);
