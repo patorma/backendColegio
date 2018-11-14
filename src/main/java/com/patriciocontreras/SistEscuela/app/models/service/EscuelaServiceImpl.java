@@ -25,14 +25,16 @@ public class EscuelaServiceImpl implements IEscuelaService{
 	@Transactional(readOnly=true)//de lectura, transaccional porque es de lectura
 	public List<Escuela> findAll() {
 		// TODO Auto-generated method stub
-		return escuelaDao.findAll();
+		return (List<Escuela>) escuelaDao.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly=true)
 	public Escuela findOne(Long id) {
 		// TODO Auto-generated method stub
-		return escuelaDao.findOne(id);
+		//el orElse se usa para retornar el objeto entity encontrado 
+		//o bien null en caso que venga vacio
+		return escuelaDao.findById(id).orElse(null);
 	}
 
 
@@ -49,7 +51,7 @@ public class EscuelaServiceImpl implements IEscuelaService{
 	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
-		escuelaDao.delete(id);
+		escuelaDao.deleteById(id);
 		
 	}
 
