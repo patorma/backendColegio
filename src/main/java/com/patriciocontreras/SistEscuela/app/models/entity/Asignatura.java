@@ -3,6 +3,7 @@ package com.patriciocontreras.SistEscuela.app.models.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,8 @@ public class Asignatura implements Serializable  {
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createAt;
+	
+	
 
 	public Long getId() {
 		return id;

@@ -1,13 +1,18 @@
 package com.patriciocontreras.SistEscuela.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -40,6 +45,9 @@ public class Escuela implements Serializable{/**
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createAt;// fecha de creacion de colegio
+	//un colegio y muchos profesores
+	@OneToMany(mappedBy="escuela",fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	private List<Profesor> profesores;
 	
 	
 	/*//se crea metodo antes de que los datos se guarden en la bd
@@ -47,6 +55,11 @@ public class Escuela implements Serializable{/**
 	public void prePersist() {
 		createAt = new Date();
 	}*/
+
+	public Escuela() {
+		
+		profesores =  new ArrayList<Profesor>();
+	}
 	
 	public Long getId() {
 		return id;
@@ -72,7 +85,16 @@ public class Escuela implements Serializable{/**
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
+	public List<Profesor> getProfesores() {
+		return profesores;
+	}
+	public void setProfesores(List<Profesor> profesores) {
+		this.profesores = profesores;
+	}
 	
+	public void addProfesor(Profesor profesor) {
+		profesores.add(profesor);
+	}
 	
 	
 }
